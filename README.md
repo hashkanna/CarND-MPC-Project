@@ -76,7 +76,7 @@ Self-Driving Car Engineer Nanodegree Program
 
 ## Timestep Length and Elapsed Duration
 
-This model uses a Kinematic model. The hyperparameters that are tuned for this MPC are N, the number of timesteps and dt the time between each step. The values are chosen are 25 for N and 0.05 for dt. Different values were tried for each. When tried with a large number of timesteps, it did not seem to provide a better performance and seemed like a waste of processing power and when setting N to a too low value, the curves become very volatile.
+This model uses a Kinematic model. The hyperparameters that are tuned for this MPC are N, the number of timesteps and dt the time between each step. The values chosen are 25 for N and 0.05 for dt. Different values were tried for each. When tried with a large number of timesteps, it did not seem to provide a better performance and seemed like a waste of processing power as it was calculating for way forward into the future and when setting N to a too low value, the curves become very volatile. When the dt was set to too high, the actuation becomes too slow for the car to use.
 
 ## Polynomial Fit
 A third order polynomial was chosen to fit the car's waypoints. Third order polynomial is generally preferred as it fits most road conditions seen today. The polynomial function is computed using the polyfit C++ function from JuliaMath.
