@@ -70,3 +70,20 @@ Self-Driving Car Engineer Nanodegree Program
 2. The actuators used to control the vehicle are represented by
     * steering angle of the car (between -25 and 25)
     * throttle to break or accelerate the car's movement (between -1 and 1. -1 for full brake and +1 for maximum acceleration)
+3. The errors of an actuator is represented by
+    * CTE: Cross Track Error. A measure of how far the car is from the trajectory.
+    * epsi. A measure of the deviation in the heading angle of the car from the trajectory.
+
+## Timestep Length and Elapsed Duration
+
+This model uses a Kinematic model. The hyperparameters that are tuned for this MPC are N, the number of timesteps and dt the time between each step. The values are chosen are 25 for N and 0.05 for dt. Different values were tried for each. When tried with a large number of timesteps, it did not seem to provide a better performance and seemed like a waste of processing power and when setting N to a too low value, the curves become very volatile.
+
+## Polynomial Fit
+A third order polynomial was chosen to fit the car's waypoints. Third order polynomial is generally preferred as it fits most road conditions seen today. The polynomial function is computed using the polyfit C++ function from JuliaMath.
+
+## MPC with Latency
+There is a latency between the time the command is actuated and the actual physical actuation. This could lead to discrepancy in the predictions and the position of the car. To account for this latency, the car's state was estimated after the latency. This was done using a latency of 100ms in line 107 of main.cpp. This provides actuation for a future time taking the latency into consideration.
+
+## Simulation
+
+![Simulation](./simulation.png)
